@@ -1,0 +1,90 @@
+/* ==========================================
+American Fried Chicken Kambil - styles.css
+Custom Styles, Animations & Scrollbars
+========================================== */
+
+:root {
+--brand-red: #991B1B;
+--brand-dark-red: #7F1D1D;
+--brand-gold: #D97706;
+--brand-light-gold: #FBBF24;
+--brand-dark: #0A0A0A;
+--brand-surface: #171717;
+--brand-card: #212121;
+}
+
+html {
+scroll-behavior: smooth;
+}
+
+body {
+background-color: #030712;
+color: #f3f4f6;
+font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+-webkit-font-smoothing: antialiased;
+-moz-osx-font-smoothing: grayscale;
+}
+
+.font-display {
+font-family: 'Playfair Display', Georgia, serif;
+}
+
+@keyframes float {
+0%, 100% {
+transform: translateY(0px);
+}
+50% {
+transform: translateY(-8px);
+}
+}
+
+.animate-float {
+animation: float 4s ease-in-out infinite;
+}
+
+.hero-pattern {
+background-color: var(--brand-dark);
+background-image: radial-gradient(rgba(217, 119, 6, 0.12) 1px, transparent 1px);
+background-size: 28px 28px;
+}
+
+::-webkit-scrollbar {
+width: 8px;
+height: 8px;
+}
+
+::-webkit-scrollbar-track {
+background: var(--brand-surface);
+}
+
+::-webkit-scrollbar-thumb {
+background: var(--brand-gold);
+border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+background: var(--brand-light-gold);
+}
+
+#category-tabs::-webkit-scrollbar {
+height: 4px;
+}
+
+#category-tabs::-webkit-scrollbar-thumb {
+background: rgba(217, 119, 6, 0.4);
+border-radius: 9999px;
+}
+
+::selection {
+background-color: #f59e0b;
+color: #030712;
+}
+
+iframe {
+filter: grayscale(100%) contrast(125%);
+transition: filter 0.3s ease;
+}
+
+iframe:hover {
+filter: grayscale(40%) contrast(110%);
+}

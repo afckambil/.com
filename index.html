@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>American Fried Chicken | Kambil, Kerala</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,650;0,700;1,600&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- External Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Playfair Display', 'serif'],
+                    },
+                    colors: {
+                        brand: {
+                            red: '#991B1B',
+                            darkRed: '#7F1D1D',
+                            gold: '#D97706',
+                            lightGold: '#FBBF24',
+                            dark: '#0A0A0A',
+                            surface: '#171717',
+                            card: '#212121'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-950 text-gray-100 font-sans antialiased selection:bg-amber-500 selection:text-gray-950">
+
+    <!-- Toast Notification Container -->
+    <div id="toast-container" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2 pointer-events-none"></div>
+
+    <!-- Navigation Header -->
+    <header class="sticky top-0 z-40 bg-gray-950/95 backdrop-blur-md text-white border-b border-amber-500/20 shadow-2xl">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20 sm:h-24">
+                <!-- Official AFC Circular Rooster Logo -->
+                <a href="#" class="flex items-center gap-3.5 group">
+                    <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-full flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform shrink-0">
+                        <svg viewBox="0 0 200 200" class="w-full h-full drop-shadow-md" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Red Circle with Yellow Border -->
+                            <circle cx="100" cy="100" r="94" fill="#DC2626" stroke="#FACC15" stroke-width="8"/>
+                            <!-- White Stylized Rooster Silhouette -->
+                            <g fill="#FFFFFF">
+                                <!-- Comb -->
+                                <path d="M84 36 C82 28, 90 25, 93 31 C96 23, 105 24, 105 32 C110 27, 117 32, 113 39 C117 41, 116 48, 110 49 L106 49 C104 42, 92 40, 84 36 Z"/>
+                                <!-- Head, Beak & Wattle -->
+                                <path d="M85 38 C79 39, 75 43, 73 46 L81 48 C77 50, 74 54, 76 58 C78 61, 83 61, 86 58 C88 55, 88 51, 86 49 L92 48 Z"/>
+                                <!-- Chest & Neck Sweep -->
+                                <path d="M92 46 C96 58, 92 68, 76 74 C56 82, 48 102, 58 122 C63 131, 71 136, 78 138 C68 128, 63 114, 67 99 C71 86, 84 79, 98 73 C106 69, 108 58, 104 46 Z"/>
+                                <!-- Back & Tail Feathers -->
+                                <path d="M104 52 C110 66, 110 84, 100 102 C95 111, 90 121, 92 132 C98 121, 105 109, 111 97 C115 89, 117 80, 116 71 C126 65, 142 66, 154 78 C164 88, 166 103, 161 116 C160 102, 152 90, 138 87 C148 96, 152 110, 147 124 C144 111, 135 101, 122 99 C131 108, 134 121, 128 133 C124 121, 116 112, 105 110 C112 100, 117 86, 116 72 C115 63, 110 55, 104 52 Z"/>
+                            </g>
+                            <!-- Bold AFC Typography -->
+                            <text x="100" y="170" text-anchor="middle" fill="#FFFFFF" font-family="Georgia, 'Times New Roman', serif" font-weight="900" font-size="45" letter-spacing="2">AFC</text>
+                        </svg>
+                    </div>
+                    <div>
+                        <span class="font-display text-2xl sm:text-3xl tracking-wide text-white block leading-none font-bold">AMERICAN</span>
+                        <span class="text-xs sm:text-sm font-bold tracking-widest text-amber-400 uppercase block mt-1" data-ml="കമ്പിൽ • ഫ്രൈഡ് ചിക്കൻ" data-en="Fried Chicken • Kambil">Fried Chicken • Kambil</span>
+                    </div>
+                </a>
+
+                <!-- Desktop Navigation -->
+                <nav class="hidden lg:flex items-center gap-7 text-sm font-semibold tracking-wide">
+                    <a href="#home" class="hover:text-amber-400 transition-colors">Home</a>
+                    <a href="#menu" class="hover:text-amber-400 transition-colors">Menu</a>
+                    <a href="#ploio-order" class="hover:text-amber-400 transition-colors flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>Ploio Tracker</a>
+                    <a href="#booking" class="hover:text-amber-400 transition-colors">Table Booking</a>
+                    <a href="#reviews" class="hover:text-amber-400 transition-colors">Reviews (5.0 ★)</a>
+                    <a href="#contact" class="hover:text-amber-400 transition-colors">Location</a>
+                </nav>
+
+                <!-- Action Buttons -->
+                <div class="flex items-center gap-2 sm:gap-3">
+                    <!-- Language Toggle -->
+                    <button onclick="toggleLanguage()" class="bg-gray-900 border border-amber-500/30 text-amber-400 px-3 py-2 rounded-xl text-xs font-bold hover:bg-gray-800 transition-all cursor-pointer flex items-center gap-1.5">
+                        <i class="fa-solid fa-globe"></i>
+                        <span id="lang-label">MALAYALAM</span>
+                    </button>
+
+                    <!-- Cart Toggle Button -->
+                    <button onclick="toggleCartModal()" class="relative bg-gray-900 border border-amber-500/30 hover:border-amber-500 text-amber-400 px-3.5 py-2.5 rounded-xl transition-all cursor-pointer flex items-center gap-2">
+                        <i class="fa-solid fa-bag-shopping"></i>
+                        <span id="cart-badge-count" class="absolute -top-2 -right-2 bg-red-600 text-white text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center shadow-lg">0</span>
+                    </button>
+
+                    <!-- Admin Dashboard Button -->
+                    <button onclick="openAdminModal()" class="bg-gray-900 hover:bg-gray-800 text-gray-300 border border-gray-700 px-3 py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5">
+                        <i class="fa-solid fa-gauge-high text-amber-400"></i>
+                        <span class="hidden sm:inline">Admin</span>
+                    </button>
+
+                    <a href="tel:09072113450" class="bg-red-700 hover:bg-red-600 text-white font-bold text-xs sm:text-sm px-3.5 sm:px-4 py-2.5 rounded-xl shadow-lg transition-all hidden sm:flex items-center gap-1.5">
+                        <i class="fa-solid fa-phone"></i>
+                        <span>090721 13450</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-pattern text-white relative overflow-hidden py-16 sm:py-28 border-b border-amber-500/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <!-- Left Content -->
+                <div class="lg:col-span-7 text-center lg:text-left">
+                    <div class="inline-flex items-center gap-2 bg-amber-500/10 border border-amber-500/30 px-4 py-2 rounded-full text-xs sm:text-sm font-medium text-amber-400 mb-6 shadow-inner">
+                        <span class="flex items-center text-amber-400">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                        </span>
+                        <span class="text-white font-bold ml-1">5.0 Google Rating</span>
+                        <span class="text-amber-500/65">• Kambil's Best Broast</span>
+                    </div>
+
+                    <h1 class="font-display text-5xl sm:text-7xl lg:text-8xl tracking-tight leading-[1.05] mb-6 font-bold">
+                        LUXURY CRUNCH, <br>
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-amber-200 to-amber-500">ROYAL FLAVOR</span>
+                    </h1>
+
+                    <p class="text-gray-300 text-base sm:text-lg max-w-2xl mx-auto lg:mx-0 mb-8 leading-relaxed font-light">
+                        Welcome to <strong class="text-white font-semibold">American Fried Chicken, Kambil</strong>. Indulge in legendary crispy pressure-fried broast, juicy zinger burgers, alfaham mandi, and refreshing mojitos. Order online for instant delivery or pickup.
+                    </p>
+
+                    <!-- Quick Status Badges -->
+                    <div class="flex flex-wrap items-center justify-center lg:justify-start gap-3 mb-8 text-xs sm:text-sm">
+                        <div class="bg-emerald-950/80 border border-emerald-500/30 text-emerald-300 px-4 py-2.5 rounded-xl flex items-center gap-2 font-medium">
+                            <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                            Open Daily • Closes 12:00 AM Midnight
+                        </div>
+                        <div class="bg-gray-900 border border-gray-800 text-gray-300 px-4 py-2.5 rounded-xl flex items-center gap-2">
+                            <i class="fa-solid fa-motorcycle text-amber-500"></i>
+                            Free Home Delivery within 4 Km • Kambil
+                        </div>
+                    </div>
+
+                    <!-- CTA Buttons -->
+                    <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+                        <a href="#menu" class="w-full sm:w-auto bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-gray-950 font-extrabold px-8 py-4 rounded-xl shadow-xl shadow-amber-500/20 transition-all text-center flex items-center justify-center gap-2.5 text-base">
+                            <span>Order Online Now</span>
+                            <i class="fa-solid fa-arrow-down"></i>
+                        </a>
+                        <a href="#booking" class="w-full sm:w-auto bg-gray-900 hover:bg-gray-800 text-amber-400 border border-amber-500/40 font-bold px-8 py-4 rounded-xl transition-all text-center flex items-center justify-center gap-2.5 text-base shadow-lg">
+                            <i class="fa-solid fa-chair"></i>
+                            <span>Book a Table</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Right Visual Card with Realistic Hero Image -->
+                <div class="lg:col-span-5 flex justify-center">
+                    <div class="relative w-full max-w-md bg-gradient-to-br from-amber-500 via-red-800 to-amber-700 p-1.5 rounded-[28px] shadow-2xl animate-float">
+                        <div class="bg-gray-900 rounded-[22px] overflow-hidden relative">
+                            <div class="h-64 sm:h-72 w-full relative overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1626645738196-c2a7c87a8f58?q=80&w=800&auto=format&fit=crop" alt="Crispy Fried Chicken" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700">
+                                <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-transparent to-transparent"></div>
+                                <!-- Official AFC Emblem Badge -->
+                                <div class="absolute top-3.5 left-3.5 w-14 h-14 rounded-full shadow-xl">
+                                    <svg viewBox="0 0 200 200" class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+                                        <circle cx="100" cy="100" r="94" fill="#DC2626" stroke="#FACC15" stroke-width="8"/>
+                                        <g fill="#FFFFFF">
+                                            <path d="M84 36 C82 28, 90 25, 93 31 C96 23, 105 24, 105 32 C110 27, 117 32, 113 39 C117 41, 116 48, 110 49 L106 49 C104 42, 92 40, 84 36 Z"/>
+                                            <path d="M85 38 C79 39, 75 43, 73 46 L81 48 C77 50, 74 54, 76 58 C78 61, 83 61, 86 58 C88 55, 88 51, 86 49 L92 48 Z"/>
+                                            <path d="M92 46 C96 58, 92 68, 76 74 C56 82, 48 102, 58 122 C63 131, 71 136, 78 138 C68 128, 63 114, 67 99 C71 86, 84 79, 98 73 C106 69, 108 58, 104 46 Z"/>
+                                            <path d="M104 52 C110 66, 110 84, 100 102 C95 111, 90 121, 92 132 C98 121, 105 109, 111 97 C115 89, 117 80, 116 71 C126 65, 142 66, 154 78 C164 88, 166 103, 161 116 C160 102, 152 90, 138 87 C148 96, 152 110, 147 124 C144 111, 135 101, 122 99 C131 108, 134 121, 128 133 C124 121, 116 112, 105 110 C112 100, 117 86, 116 72 C115 63, 110 55, 104 52 Z"/>
+                                        </g>
+                                        <text x="100" y="170" text-anchor="middle" fill="#FFFFFF" font-family="Georgia, 'Times New Roman', serif" font-weight="900" font-size="45" letter-spacing="2">AFC</text>
+                                    </svg>
+                                </div>
+                                <span class="absolute top-4 right-4 bg-amber-500 text-gray-950 font-black text-xs uppercase tracking-widest px-3.5 py-1.5 rounded-full shadow-lg">Chef's Special</span>
+                            </div>
+                            <div class="p-6 text-center">
+                                <h2 class="font-display text-2xl sm:text-3xl text-white tracking-wide font-bold">ROYAL FRIED CHICKEN BUCKET</h2>
+                                <p class="text-gray-400 text-xs sm:text-sm mt-2 font-light">Crispy on the outside, succulent and tender inside with signature spice rub.</p>
+                                <div class="mt-5 pt-4 border-t border-gray-800 flex items-center justify-between text-xs sm:text-sm">
+                                    <span class="text-gray-400">Order Hotline</span>
+                                    <a href="tel:09072113450" class="text-amber-400 font-bold hover:underline">090721 13450 →</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LIVE PLOIO ORDER & DELIVERY SYSTEM -->
+    <section id="ploio-order" class="py-14 sm:py-20 bg-gray-900 border-b border-amber-500/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <span class="text-amber-400 font-bold text-xs uppercase tracking-widest bg-amber-500/10 px-3.5 py-1.5 rounded-full border border-amber-500/30">Live Ploio System</span>
+                <h2 class="font-display text-4xl sm:text-5xl text-white tracking-wide mt-3 font-bold">TRACK YOUR LIVE ORDER</h2>
+                <p class="text-gray-400 text-sm sm:text-base mt-2">Enter your Order ID or place an order via cart to watch real-time status updates via Ploio in Kambil.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                <!-- Status & Tracking Form -->
+                <div class="lg:col-span-6 bg-gray-950 rounded-3xl p-6 sm:p-8 border border-amber-500/20 shadow-2xl">
+                    <h3 class="font-display text-2xl text-white mb-4 font-bold flex items-center gap-2">
+                        <i class="fa-solid fa-magnifying-glass-location text-amber-500"></i> Track Order Status
+                    </h3>
+                    <div class="space-y-4 mb-6">
+                        <div>
+                            <label class="block text-xs font-bold text-gray-300 uppercase tracking-wider mb-1">Enter Order ID</label>
+                            <div class="flex gap-2">
+                                <input type="text" id="track-order-id-input" placeholder="e.g., AFC-482910" class="w-full px-4 py-3 rounded-xl bg-gray-900 border border-gray-800 text-white focus:ring-2 focus:ring-amber-500 focus:border-transparent text-sm font-mono">
+                                <button onclick="trackOrderLive()" class="bg-amber-500 hover:bg-amber-400 text-gray-950 font-extrabold px-5 py-3 rounded-xl text-sm transition-all shrink-0 cursor-pointer">Track</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-gray-900 p-5 rounded-2xl border border-gray-800">
+                        <h4 class="text-xs font-bold text-amber-400 uppercase tracking-wider mb-2">Active Cart Summary</h4>
+                        <div id="ploio-cart-summary-preview" class="text-sm text-gray-300 mb-3">
+                            No items in active cart. Add items from the menu below to checkout.
+                        </div>
+                        <button onclick="toggleCartModal()" class="w-full bg-gray-800 hover:bg-gray-700 text-white font-bold py-2.5 rounded-xl text-xs transition-colors border border-gray-700 cursor-pointer flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-cart-shopping text-amber-400"></i> Open Cart & Checkout
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Live Status Timeline Display -->
+                <div class="lg:col-span-6 bg-gray-950 rounded-3xl p-6 sm:p-8 border border-amber-500/20 shadow-2xl flex flex-col justify-between min-h-[420px]">
+                    <div>
+                        <div class="flex items-center justify-between pb-4 border-b border-gray-800 mb-6">
+                            <div>
+                                <span class="text-xs text-amber-400 font-bold uppercase tracking-wider">Ploio Tracker v2.5</span>
+                                <h3 class="font-display text-2xl text-white font-bold">REAL-TIME STATUS</h3>
+                            </div>
+                            <div id="order-id-badge" class="bg-gray-900 text-gray-400 text-xs px-3 py-1.5 rounded-full font-mono border border-gray-800">
+                                No Active Order
+                            </div>
+                        </div>
+
+                        <!-- Status Timeline -->
+                        <div id="tracking-timeline" class="space-y-6 relative before:absolute before:left-4 before:top-2 before:bottom-2 before:w-0.5 before:bg-gray-800 my-4">
+                            <div class="flex items-start gap-4 relative">
+                                <div id="step-1-icon" class="w-8 h-8 rounded-full bg-gray-800 text-gray-400 flex items-center justify-center font-bold text-xs shrink-0 z-10 transition-all">1</div>
+                                <div>
+                                    <h4 id="step-1-title" class="text-sm font-bold text-gray-400">Order Placed</h4>
+                                    <p id="step-1-desc" class="text-xs text-gray-500">Waiting for order submission...</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-4 relative">
+                                <div id="step-2-icon" class="w-8 h-8 rounded-full bg-gray-800 text-gray-400 flex items-center justify-center font-bold text-xs shrink-0 z-10 transition-all">2</div>
+                                <div>
+                                    <h4 id="step-2-title" class="text-sm font-bold text-gray-400">Kitchen Preparing</h4>
+                                    <p id="step-2-desc" class="text-xs text-gray-500">Marinating & pressure frying fresh chicken</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-4 relative">
+                                <div id="step-3-icon" class="w-8 h-8 rounded-full bg-gray-800 text-gray-400 flex items-center justify-center font-bold text-xs shrink-0 z-10 transition-all">3</div>
+                                <div>
+                                    <h4 id="step-3-title" class="text-sm font-bold text-gray-400">Crispy Packing</h4>
+                                    <p id="step-3-desc" class="text-xs text-gray-500">Hot fries, buns & garlic dip packed securely</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-4 relative">
+                                <div id="step-4-icon" class="w-8 h-8 rounded-full bg-gray-800 text-gray-400 flex items-center justify-center font-bold text-xs shrink-0 z-10 transition-all">4</div>
+                                <div>
+                                    <h4 id="step-4-title" class="text-sm font-bold text-gray-400">Out for Delivery / Ready</h4>
+                                    <p id="step-4-desc" class="text-xs text-gray-500">Ploio rider on the way in Kambil</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="tracking-footer" class="mt-6 pt-5 border-t border-gray-800 text-center">
+                        <p class="text-xs text-gray-400">Place an order via cart or enter ID to initiate live Ploio simulator.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Section with Add/Manage Capability -->
+    <section id="menu" class="py-16 sm:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
+            <div>
+                <span class="text-amber-400 font-bold text-xs uppercase tracking-widest bg-amber-500/10 px-3.5 py-1.5 rounded-full border border-amber-500/30">Exquisite Taste</span>
+                <h2 class="font-display text-4xl sm:text-5xl text-white tracking-wide mt-3 font-bold">OUR 5-STAR MENU</h2>
+                <p class="text-gray-400 text-sm sm:text-base mt-1">Browse crispy specialties, add items to cart, or manage your shop inventory.</p>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="flex flex-wrap items-center gap-3">
+                <button onclick="openAddModal()" class="bg-amber-500 hover:bg-amber-400 text-gray-950 font-bold px-5 py-3 rounded-xl shadow-lg transition-all flex items-center gap-2 cursor-pointer">
+                    <i class="fa-solid fa-circle-plus text-lg"></i>
+                    <span>+ Add New Item</span>
+                </button>
+                <button id="manage-toggle-btn" onclick="toggleManageMode()" class="bg-gray-900 hover:bg-gray-800 text-gray-200 border border-amber-500/30 font-semibold px-4 py-3 rounded-xl shadow-lg transition-all flex items-center gap-2 cursor-pointer">
+                    <i class="fa-solid fa-pen-to-square text-amber-400"></i>
+                    <span id="manage-btn-text">Edit / Delete Items</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Category Filter & Search -->
+        <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 mb-8 bg-gray-900 p-3 rounded-2xl shadow-xl border border-amber-500/20">
+            <div id="category-tabs" class="flex items-center gap-2 overflow-x-auto pb-1 sm:pb-0">
+                <button onclick="filterCategory('All')" class="cat-btn active px-4 py-2 rounded-xl text-sm font-bold bg-amber-500 text-gray-950 transition-all whitespace-nowrap cursor-pointer">All Items</button>
+                <button onclick="filterCategory('Fried Chicken')" class="cat-btn px-4 py-2 rounded-xl text-sm font-semibold text-gray-300 hover:bg-gray-800 transition-all whitespace-nowrap cursor-pointer">🍗 Fried Chicken</button>
+                <button onclick="filterCategory('Burgers')" class="cat-btn px-4 py-2 rounded-xl text-sm font-semibold text-gray-300 hover:bg-gray-800 transition-all whitespace-nowrap cursor-pointer">🍔 Burgers</button>
+                <button onclick="filterCategory('Pizza')" class="cat-btn px-4 py-2 rounded-xl text-sm font-semibold text-gray-300 hover:bg-gray-800 transition-all whitespace-nowrap cursor-pointer">🍕 Pizza</button>
+                <button onclick="filterCategory('Loaded Fries')" class="cat-btn px-4 py-2 rounded-xl text-sm font-semibold text-gray-300 hover:bg-gray-800 transition-all whitespace-nowrap cursor-pointer">🍟 Loaded Fries</button>
+                <button onclick="filterCategory('Roll Zone')" class="cat-btn px-4 py-2 rounded-xl text-sm font-semibold text-gray-300 hover:bg-gray-800 transition-all whitespace-nowrap cursor-pointer">🌯 Roll Zone</button>
+                <button onclick="filterCategory('Momos')" class="cat-btn px-4 py-2 rounded-xl text-sm font-semibold text-gray-300 hover:bg-gray-800 transition-all whitespace-nowrap cursor-pointer">🥟 Momos</button>
+                <button onclick="filterCategory('Combos & Meals')" class="cat-btn px-4 py-2 rounded-xl text-sm font-semibold text-gray-300 hover:bg-gray-800 transition-all whitespace-nowrap cursor-pointer">🍱 Meals & Party Box</button>
+                <button onclick="filterCategory('Add-Ons & Drinks')" class="cat-btn px-4 py-2 rounded-xl text-sm font-semibold text-gray-300 hover:bg-gray-800 transition-all whitespace-nowrap cursor-pointer">🥤 Add-Ons & Drinks</button>
+            </div>
+
+            <div class="relative min-w-[220px]">
+                <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400 text-sm"></i>
+                <input type="text" id="menu-search" oninput="renderMenu()" placeholder="Search menu..." class="w-full pl-9 pr-4 py-2 bg-gray-950 border border-gray-800 rounded-xl text-sm text-white focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent">
+            </div>
+        </div>
+
+        <!-- Menu Grid -->
+        <div id="menu-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+
+        <!-- Empty State -->
+        <div id="empty-menu-state" class="hidden text-center py-20 bg-gray-900 rounded-3xl border border-dashed border-amber-500/30">
+            <div class="w-16 h-16 bg-gray-800 rounded-full flex items-center justify-center mx-auto mb-4 text-amber-400 text-2xl">
+                <i class="fa-solid fa-utensils"></i>
+            </div>
+            <h3 class="text-lg font-bold text-white">No menu items found</h3>
+            <p class="text-gray-400 text-sm mt-1 mb-5">Try clearing your search filter or add a new item.</p>
+            <button onclick="openAddModal()" class="bg-amber-500 text-gray-950 font-bold px-5 py-2.5 rounded-xl text-sm hover:bg-amber-400 transition-colors cursor-pointer">
+                + Add Menu Item
+            </button>
+        </div>
+    </section>
+
+    <!-- Table Booking Section -->
+    <section id="booking" class="py-16 bg-gray-900 border-t border-b border-amber-500/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <div class="lg:col-span-5">
+                    <span class="text-amber-400 font-bold text-xs uppercase tracking-widest bg-amber-500/10 px-3.5 py-1.5 rounded-full border border-amber-500/30">Dine-in Reservation</span>
+                    <h2 class="font-display text-4xl sm:text-5xl text-white tracking-wide mt-3 font-bold">RESERVE A TABLE AT KAMBIL</h2>
+                    <p class="text-gray-300 text-base mt-3 leading-relaxed font-light">
+                        Planning to visit with family or friends? Book your table in advance for a seamless 5-star dining experience at American Fried Chicken Kambil.
+                    </p>
+                    <div class="mt-6 space-y-3 text-sm text-gray-300">
+                        <div class="flex items-center gap-3"><i class="fa-solid fa-check text-amber-400"></i> Instant Table Confirmation</div>
+                        <div class="flex items-center gap-3"><i class="fa-solid fa-check text-amber-400"></i> Family & VIP Booths Available</div>
+                        <div class="flex items-center gap-3"><i class="fa-solid fa-check text-amber-400"></i> Zero Reservation Fees</div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-7 bg-gray-950 p-8 rounded-3xl border border-amber-500/20 shadow-2xl">
+                    <form onsubmit="submitTableBooking(event)" class="space-y-4">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-bold text-gray-300 uppercase tracking-wider mb-1">Full Name *</label>
+                                <input type="text" id="book-name" required placeholder="e.g., Abdul Rahim" class="w-full px-4 py-3 rounded-xl bg-gray-900 border border-gray-800 text-white text-sm focus:ring-2 focus:ring-amber-500">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-gray-300 uppercase tracking-wider mb-1">Phone Number *</label>
+                                <input type="tel" id="book-phone" required placeholder="90721XXXXX" class="w-full px-4 py-3 rounded-xl bg-gray-900 border border-gray-800 text-white text-sm focus:ring-2 focus:ring-amber-500">
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                            <div>
+                                <label class="block text-xs font-bold text-gray-300 uppercase tracking-wider mb-1">Date *</label>
+                                <input type="date" id="book-date" required class="w-full px-4 py-3 rounded-xl bg-gray-900 border border-gray-800 text-white text-sm focus:ring-2 focus:ring-amber-500">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-gray-300 uppercase tracking-wider mb-1">Time *</label>
+                                <input type="time" id="book-time" required class="w-full px-4 py-3 rounded-xl bg-gray-900 border border-gray-800 text-white text-sm focus:ring-2 focus:ring-amber-500">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-gray-300 uppercase tracking-wider mb-1">Guests *</label>
+                                <select id="book-guests" class="w-full px-4 py-3 rounded-xl bg-gray-900 border border-gray-800 text-white text-sm focus:ring-2 focus:ring-amber-500">
+                                    <option value="2 Guests">2 Guests (Couple)</option>
+                                    <option value="4 Guests">4 Guests (Family)</option>
+                                    <option value="6 Guests">6 Guests (Group)</option>
+                                    <option value="10+ Guests">10+ Guests (Party)</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-gray-300 uppercase tracking-wider mb-1">Special Requests</label>
+                            <textarea id="book-notes" rows="2" placeholder="High chair, birthday celebration..." class="w-full px-4 py-3 rounded-xl bg-gray-900 border border-gray-800 text-white text-sm focus:ring-2 focus:ring-amber-500"></textarea>
+                        </div>
+                        <button type="submit" class="w-full bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 text-gray-950 font-extrabold py-4 rounded-xl shadow-xl transition-all cursor-pointer text-base">
+                            Confirm Table Reservation
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews Banner Section -->
+    <section id="reviews" class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="bg-gradient-to-r from-gray-900 to-gray-950 border border-amber-500/30 rounded-3xl p-8 sm:p-12 flex flex-col lg:flex-row items-center justify-between gap-8 shadow-2xl">
+            <div class="text-center lg:text-left">
+                <div class="flex items-center justify-center lg:justify-start gap-2 text-amber-400 text-2xl mb-2">
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <span class="text-white font-black ml-2">5.0 / 5.0</span>
+                </div>
+                <h3 class="font-display text-3xl sm:text-4xl tracking-wide font-bold">LOVED BY FOODIES IN KAMBIL</h3>
+                <p class="text-gray-300 mt-2 max-w-xl text-sm sm:text-base font-light">
+                    Rated 5.0 stars on Google Reviews! Thank you to our wonderful customers for supporting our fast food restaurant.
+                </p>
+            </div>
+            <div class="flex flex-col sm:flex-row gap-3 shrink-0">
+                <a href="https://www.google.com/search?q=American+fried+chicken+kambil" target="_blank" rel="noopener noreferrer" class="bg-white text-gray-950 hover:bg-gray-100 font-extrabold px-6 py-4 rounded-xl shadow-lg transition-all flex items-center justify-center gap-2.5">
+                    <i class="fa-brands fa-google text-red-600 text-lg"></i>
+                    <span>Write a Google Review</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Location, Hours & Contact Section -->
+    <section id="contact" class="py-16 sm:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-t border-amber-500/10">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
+            <div class="bg-gray-900 rounded-3xl p-8 shadow-xl border border-amber-500/20 flex flex-col justify-between">
+                <div>
+                    <span class="text-amber-400 font-bold text-xs uppercase tracking-widest bg-amber-500/10 px-3.5 py-1.5 rounded-full border border-amber-500/30">Visit Us Today</span>
+                    <h2 class="font-display text-4xl text-white tracking-wide mt-3 mb-6 font-bold">STORE DETAILS & HOURS</h2>
+
+                    <div class="space-y-6">
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 rounded-2xl bg-amber-500/10 text-amber-400 border border-amber-500/30 flex items-center justify-center shrink-0 text-xl">
+                                <i class="fa-solid fa-location-dot"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-white text-base">Address</h4>
+                                <p class="text-gray-400 text-sm mt-0.5">Near Salafi Masjid, Kambil, Keralam 670601, India</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 rounded-2xl bg-amber-500/10 text-amber-400 border border-amber-500/30 flex items-center justify-center shrink-0 text-xl">
+                                <i class="fa-solid fa-phone-volume"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-white text-base">Phone / Order Hotline</h4>
+                                <a href="tel:09072113450" class="text-amber-400 font-extrabold text-lg hover:underline mt-0.5 inline-block">090721 13450</a>
+                                <p class="text-gray-400 text-xs">Call for takeaway & Ploio delivery</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 rounded-2xl bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 flex items-center justify-center shrink-0 text-xl">
+                                <i class="fa-solid fa-clock"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-white text-base">Opening Hours</h4>
+                                <p class="text-emerald-400 font-semibold text-sm mt-0.5">Open Now • Closes at 12:00 AM (Midnight)</p>
+                                <p class="text-gray-400 text-xs">Monday – Sunday</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-3 mt-8 pt-6 border-t border-gray-800">
+                    <a href="tel:09072113450" class="bg-red-700 hover:bg-red-600 text-white font-bold py-3.5 px-4 rounded-xl text-center text-sm transition-colors flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-phone"></i>
+                        <span>Call Shop</span>
+                    </a>
+                    <a href="https://wa.me/919072113450?text=Hello%20American%20Fried%20Chicken%20Kambil!%20I%20would%20like%20to%20place%20an%20order." target="_blank" rel="noopener noreferrer" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3.5 px-4 rounded-xl text-center text-sm transition-colors flex items-center justify-center gap-2">
+                        <i class="fa-brands fa-whatsapp text-lg"></i>
+                        <span>WhatsApp</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="bg-gray-900 rounded-3xl overflow-hidden shadow-xl border border-amber-500/20 min-h-[380px] relative">
+                <iframe 
+                    title="American Fried Chicken Kambil Location"
+                    class="w-full h-full min-h-[380px] border-0 grayscale contrast-125"
+                    loading="lazy" 
+                    referrerpolicy="no-referrer-when-downgrade"
+                    src="https://maps.google.com/maps?q=Kambil,%20Kerala%20670601&t=&z=15&ie=UTF8&iwloc=&output=embed">
+                </iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-950 text-gray-400 py-10 border-t border-amber-500/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm">
+            <div class="flex items-center gap-3 text-white">
+                <div class="w-11 h-11 rounded-full shrink-0">
+                    <svg viewBox="0 0 200 200" class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="100" cy="100" r="94" fill="#DC2626" stroke="#FACC15" stroke-width="8"/>
+                        <g fill="#FFFFFF">
+                            <path d="M84 36 C82 28, 90 25, 93 31 C96 23, 105 24, 105 32 C110 27, 117 32, 113 39 C117 41, 116 48, 110 49 L106 49 C104 42, 92 40, 84 36 Z"/>
+                            <path d="M85 38 C79 39, 75 43, 73 46 L81 48 C77 50, 74 54, 76 58 C78 61, 83 61, 86 58 C88 55, 88 51, 86 49 L92 48 Z"/>
+                            <path d="M92 46 C96 58, 92 68, 76 74 C56 82, 48 102, 58 122 C63 131, 71 136, 78 138 C68 128, 63 114, 67 99 C71 86, 84 79, 98 73 C106 69, 108 58, 104 46 Z"/>
+                            <path d="M104 52 C110 66, 110 84, 100 102 C95 111, 90 121, 92 132 C98 121, 105 109, 111 97 C115 89, 117 80, 116 71 C126 65, 142 66, 154 78 C164 88, 166 103, 161 116 C160 102, 152 90, 138 87 C148 96, 152 110, 147 124 C144 111, 135 101, 122 99 C131 108, 134 121, 128 133 C124 121, 116 112, 105 110 C112 100, 117 86, 116 72 C115 63, 110 55, 104 52 Z"/>
+                        </g>
+                        <text x="100" y="170" text-anchor="middle" fill="#FFFFFF" font-family="Georgia, 'Times New Roman', serif" font-weight="900" font-size="45" letter-spacing="2">AFC</text>
+                    </svg>
+                </div>
+                <span class="font-display text-2xl tracking-wide font-bold">AMERICAN FRIED CHICKEN</span>
+            </div>
+            <p class="text-center sm:text-right font-light">
+                Near Salafi Masjid, Kambil, Keralam 670601 • Tel: <a href="tel:09072113450" class="text-amber-400 hover:underline">090721 13450</a>
+            </p>
+        </div>
+    </footer>
+
+    <!-- CART & CHECKOUT MODAL -->
+    <div id="cart-modal" class="fixed inset-0 z-50 hidden items-center justify-end bg-black/80 backdrop-blur-sm transition-all">
+        <div class="bg-gray-900 border-l border-amber-500/40 w-full max-w-md h-full flex flex-col justify-between p-6 sm:p-8 shadow-2xl overflow-y-auto">
+            <div>
+                <div class="flex items-center justify-between pb-4 border-b border-gray-800">
+                    <h3 class="font-display text-2xl text-white tracking-wide font-bold">YOUR CART</h3>
+                    <button onclick="toggleCartModal()" class="w-9 h-9 rounded-full bg-gray-800 hover:bg-gray-700 flex items-center justify-center text-gray-300 cursor-pointer">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+
+                <div id="cart-items-container" class="space-y-4 my-6">
+                    <!-- Cart items populated dynamically -->
+                </div>
+            </div>
+
+            <div id="cart-checkout-section" class="border-t border-gray-800 pt-6">
+                <div class="flex items-center justify-between text-lg font-bold text-white mb-4">
+                    <span>Total Amount:</span>
+                    <span id="cart-total-price" class="text-amber-400 font-display text-2xl">₹0</span>
+                </div>
+
+                <div class="space-y-3 mb-6">
+                    <div>
+                        <label class="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-1">Customer Name *</label>
+                        <input type="text" id="checkout-name" placeholder="Mohammed Faris" class="w-full px-3.5 py-2.5 rounded-xl bg-gray-950 border border-gray-800 text-white text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-1">Phone Number *</label>
+                        <input type="tel" id="checkout-phone" placeholder="90721XXXXX" class="w-full px-3.5 py-2.5 rounded-xl bg-gray-950 border border-gray-800 text-white text-sm">
+                    </div>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-1">Order Type *</label>
+                            <select id="checkout-type" onchange="toggleLocationField()" class="w-full px-3.5 py-2.5 rounded-xl bg-gray-950 border border-gray-800 text-white text-sm">
+                                <option value="Delivery">Ploio Delivery</option>
+                                <option value="Takeaway">Takeaway Pickup</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-1">Payment *</label>
+                            <select id="checkout-payment" class="w-full px-3.5 py-2.5 rounded-xl bg-gray-950 border border-gray-800 text-white text-sm">
+                                <option value="COD">Cash on Delivery</option>
+                                <option value="UPI">UPI / Online</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div id="checkout-location-wrapper">
+                        <div class="flex items-center justify-between mb-1">
+                            <label class="block text-xs font-bold text-gray-400 uppercase tracking-wider">Delivery Location / Landmark *</label>
+                            <button type="button" onclick="detectCustomerLocation()" class="text-[11px] font-bold text-amber-400 hover:text-amber-300 flex items-center gap-1 cursor-pointer">
+                                <i class="fa-solid fa-location-crosshairs"></i> Use Current GPS
+                            </button>
+                        </div>
+                        <textarea id="checkout-location" rows="2" placeholder="House/Shop name, Landmark, Kambil..." class="w-full px-3.5 py-2.5 rounded-xl bg-gray-950 border border-gray-800 text-white text-sm focus:ring-2 focus:ring-amber-500"></textarea>
+                    </div>
+                </div>
+
+                <div class="flex gap-3">
+                    <button onclick="checkoutWhatsApp()" class="flex-1 bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3.5 px-4 rounded-xl text-sm transition-all flex items-center justify-center gap-2 cursor-pointer shadow-lg">
+                        <i class="fa-brands fa-whatsapp text-lg"></i>
+                        <span>WhatsApp Order</span>
+                    </button>
+                    <button onclick="checkoutPloioSystem()" class="flex-1 bg-amber-500 hover:bg-amber-400 text-gray-950 font-extrabold py-3.5 px-4 rounded-xl text-sm transition-all flex items-center justify-center gap-2 cursor-pointer shadow-lg">
+                        <i class="fa-solid fa-truck-fast"></i>
+                        <span>Ploio Checkout</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ADD / EDIT MENU ITEM MODAL -->
+    <div id="menu-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/80 backdrop-blur-md p-4">
+        <div class="bg-gray-900 border border-amber-500/40 rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl max-h-[92vh] overflow-y-auto">
+            <div class="flex items-center justify-between pb-4 border-b border-gray-800">
+                <h3 id="modal-title" class="font-display text-2xl text-white font-bold">ADD NEW MENU ITEM</h3>
+                <button onclick="closeModal()" class="w-9 h-9 rounded-full bg-gray-800 hover:bg-gray-700 flex items-center justify-center text-gray-300 cursor-pointer">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <form id="menu-form" onsubmit="saveMenuItem(event)" class="space-y-4 mt-5">
+                <input type="hidden" id="edit-item-id">
+                <div>
+                    <label class="block text-xs font-bold text-gray-300 uppercase tracking-wider mb-1">Item Name *</label>
+                    <input type="text" id="item-name" required placeholder="e.g., Crispy Chicken Burger" class="w-full px-4 py-3 rounded-xl bg-gray-950 border border-gray-800 text-white text-sm">
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold text-gray-300 uppercase tracking-wider mb-1">Category *</label>
+                        <select id="item-category" class="w-full px-4 py-3 rounded-xl bg-gray-950 border border-gray-800 text-white text-sm">
+                            <option value="Fried Chicken">Fried Chicken</option>
+                            <option value="Burgers">Burgers</option>
+                            <option value="Pizza">Pizza</option>
+                            <option value="Loaded Fries">Loaded Fries</option>
+                            <option value="Roll Zone">Roll Zone</option>
+                            <option value="Momos">Momos</option>
+                            <option value="Combos & Meals">Combos & Meals</option>
+                            <option value="Add-Ons & Drinks">Add-Ons & Drinks</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-gray-300 uppercase tracking-wider mb-1">Price (₹ INR) *</label>
+                        <input type="number" id="item-price" required min="1" step="1" placeholder="240" class="w-full px-4 py-3 rounded-xl bg-gray-950 border border-gray-800 text-white text-sm">
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-gray-300 uppercase tracking-wider mb-1">Dish Photo (Upload from Gallery or Paste URL) *</label>
+                    <div class="space-y-2.5 bg-gray-950 p-3.5 rounded-2xl border border-gray-800">
+                        <div class="flex items-center gap-3">
+                            <img id="item-image-preview" src="https://images.unsplash.com/photo-1626645738196-c2a7c87a8f58?q=80&w=400&auto=format&fit=crop" alt="Preview" class="w-16 h-16 rounded-xl object-cover border border-amber-500/30 shrink-0">
+                            <div class="flex-1 space-y-2">
+                                <label class="w-full bg-gray-800 hover:bg-gray-700 text-amber-400 font-bold py-2 px-3 rounded-xl text-xs transition-colors flex items-center justify-center gap-2 cursor-pointer border border-amber-500/30">
+                                    <i class="fa-solid fa-camera"></i>
+                                    <span>Upload Photo from Device / Gallery</span>
+                                    <input type="file" id="item-image-file" accept="image/*" onchange="handleImageUpload(event)" class="hidden">
+                                </label>
+                                <input type="text" id="item-image" required oninput="updateImagePreview(this.value)" placeholder="Or paste image URL..." class="w-full px-3 py-2 rounded-xl bg-gray-900 border border-gray-800 text-white text-xs">
+                            </div>
+                        </div>
+                        <div class="pt-1">
+                            <span class="text-[10px] font-bold uppercase tracking-wider text-gray-400 block mb-1.5">Quick Photo Presets:</span>
+                            <div class="flex flex-wrap gap-1.5">
+                                <button type="button" onclick="selectPresetImage('https://images.unsplash.com/photo-1626645738196-c2a7c87a8f58?q=80&w=800&auto=format&fit=crop')" class="text-[11px] bg-gray-900 hover:bg-gray-800 text-gray-300 px-2.5 py-1 rounded-lg border border-gray-700 cursor-pointer">🍗 Fried Chicken</button>
+                                <button type="button" onclick="selectPresetImage('https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=800&auto=format&fit=crop')" class="text-[11px] bg-gray-900 hover:bg-gray-800 text-gray-300 px-2.5 py-1 rounded-lg border border-gray-700 cursor-pointer">🍔 Burger</button>
+                                <button type="button" onclick="selectPresetImage('https://images.unsplash.com/photo-1513104890138-7c749659a591?q=80&w=800&auto=format&fit=crop')" class="text-[11px] bg-gray-900 hover:bg-gray-800 text-gray-300 px-2.5 py-1 rounded-lg border border-gray-700 cursor-pointer">🍕 Pizza</button>
+                                <button type="button" onclick="selectPresetImage('https://images.unsplash.com/photo-1585109649139-366815a0d713?q=80&w=800&auto=format&fit=crop')" class="text-[11px] bg-gray-900 hover:bg-gray-800 text-gray-300 px-2.5 py-1 rounded-lg border border-gray-700 cursor-pointer">🍟 Loaded Fries</button>
+                                <button type="button" onclick="selectPresetImage('https://images.unsplash.com/photo-1626700051175-6818013e1d4f?q=80&w=800&auto=format&fit=crop')" class="text-[11px] bg-gray-900 hover:bg-gray-800 text-gray-300 px-2.5 py-1 rounded-lg border border-gray-700 cursor-pointer">🌯 Wrap</button>
+                                <button type="button" onclick="selectPresetImage('https://images.unsplash.com/photo-1625220194771-7ebdea0b70b9?q=80&w=800&auto=format&fit=crop')" class="text-[11px] bg-gray-900 hover:bg-gray-800 text-gray-300 px-2.5 py-1 rounded-lg border border-gray-700 cursor-pointer">🥟 Momos</button>
+                                <button type="button" onclick="selectPresetImage('https://images.unsplash.com/photo-1622483767028-3f66f32aef97?q=80&w=800&auto=format&fit=crop')" class="text-[11px] bg-gray-900 hover:bg-gray-800 text-gray-300 px-2.5 py-1 rounded-lg border border-gray-700 cursor-pointer">🥤 Drink</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-gray-300 uppercase tracking-wider mb-1">Special Badge</label>
+                    <input type="text" id="item-tag" placeholder="Bestseller, Spicy, Chef's Special" class="w-full px-4 py-3 rounded-xl bg-gray-950 border border-gray-800 text-white text-sm">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-gray-300 uppercase tracking-wider mb-1">Description</label>
+                    <textarea id="item-desc" rows="2" placeholder="Short tasty description..." class="w-full px-4 py-3 rounded-xl bg-gray-950 border border-gray-800 text-white text-sm"></textarea>
+                </div>
+                <div class="flex items-center justify-end gap-3 pt-4 border-t border-gray-800">
+                    <button type="button" onclick="closeModal()" class="px-5 py-3 rounded-xl border border-gray-700 text-gray-300 text-sm cursor-pointer">Cancel</button>
+                    <button type="submit" class="px-6 py-3 rounded-xl bg-amber-500 text-gray-950 font-extrabold text-sm shadow-xl cursor-pointer">Save Item</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- ADMIN PASSWORD PROTECTION MODAL -->
+    <div id="admin-auth-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/85 backdrop-blur-md p-4">
+        <div class="bg-gray-900 border border-amber-500/40 rounded-3xl max-w-sm w-full p-6 sm:p-8 shadow-2xl text-center">
+            <div class="w-14 h-14 rounded-2xl bg-amber-500/15 text-amber-400 border border-amber-500/30 flex items-center justify-center mx-auto mb-4 text-2xl">
+                <i class="fa-solid fa-lock"></i>
+            </div>
+            <h3 class="font-display text-2xl text-white font-bold">ADMIN ACCESS</h3>
+            <p class="text-xs text-gray-400 mt-1 mb-5">Enter the 6-digit security PIN to open Restaurant Dashboard.</p>
+            <form onsubmit="verifyAdminPassword(event)" class="space-y-4">
+                <input type="password" id="admin-password-input" inputmode="numeric" maxlength="10" required placeholder="Enter PIN" class="w-full px-4 py-3.5 rounded-xl bg-gray-950 border border-gray-800 text-white text-center text-lg font-mono tracking-widest focus:outline-none focus:ring-2 focus:ring-amber-500">
+                <div class="grid grid-cols-2 gap-3 pt-1">
+                    <button type="button" onclick="closeAdminAuthModal()" class="py-3 rounded-xl border border-gray-700 text-gray-300 text-sm font-semibold hover:bg-gray-800 cursor-pointer">Cancel</button>
+                    <button type="submit" class="py-3 rounded-xl bg-amber-500 hover:bg-amber-400 text-gray-950 font-extrabold text-sm shadow-lg cursor-pointer">Unlock</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- RESTAURANT OWNER ADMIN DASHBOARD MODAL -->
+    <div id="admin-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/85 backdrop-blur-md p-4">
+        <div class="bg-gray-900 border border-amber-500/50 rounded-3xl max-w-4xl w-full p-6 sm:p-8 shadow-2xl max-h-[92vh] overflow-y-auto">
+            <div class="flex items-center justify-between pb-4 border-b border-gray-800 mb-6">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center border border-amber-500/40 font-bold"><i class="fa-solid fa-gauge-high"></i></div>
+                    <div>
+                        <h3 class="font-display text-2xl text-white font-bold">RESTAURANT ADMIN DASHBOARD</h3>
+                        <p class="text-xs text-gray-400">American Fried Chicken Kambil Management Suite</p>
+                    </div>
+                </div>
+                <button onclick="closeAdminModal()" class="w-9 h-9 rounded-full bg-gray-800 hover:bg-gray-700 flex items-center justify-center text-gray-300 cursor-pointer">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <!-- Stats Grid -->
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
+                <div class="bg-gray-950 p-4 rounded-2xl border border-gray-800">
+                    <span class="text-xs text-gray-400 uppercase tracking-wider">Total Sales</span>
+                    <h4 id="admin-total-sales" class="text-2xl font-bold text-amber-400 mt-1">₹14,250</h4>
+                </div>
+                <div class="bg-gray-950 p-4 rounded-2xl border border-gray-800">
+                    <span class="text-xs text-gray-400 uppercase tracking-wider">Today's Orders</span>
+                    <h4 id="admin-today-orders" class="text-2xl font-bold text-white mt-1">18</h4>
+                </div>
+                <div class="bg-gray-950 p-4 rounded-2xl border border-gray-800">
+                    <span class="text-xs text-gray-400 uppercase tracking-wider">Active Bookings</span>
+                    <h4 id="admin-active-bookings" class="text-2xl font-bold text-emerald-400 mt-1">5</h4>
+                </div>
+                <div class="bg-gray-950 p-4 rounded-2xl border border-gray-800">
+                    <span class="text-xs text-gray-400 uppercase tracking-wider">Menu Items</span>
+                    <h4 id="admin-menu-count" class="text-2xl font-bold text-white mt-1">6</h4>
+                </div>
+            </div>
+
+            <!-- Admin Tabs -->
+            <div class="flex gap-3 mb-6 border-b border-gray-800 pb-3">
+                <button onclick="switchAdminTab('orders')" id="tab-btn-orders" class="admin-tab-btn active px-4 py-2 rounded-xl text-sm font-bold bg-amber-500 text-gray-950 cursor-pointer">Live Orders</button>
+                <button onclick="switchAdminTab('bookings')" id="tab-btn-bookings" class="admin-tab-btn px-4 py-2 rounded-xl text-sm font-semibold text-gray-300 hover:bg-gray-800 cursor-pointer">Table Reservations</button>
+                <button onclick="switchAdminTab('menu')" id="tab-btn-menu" class="admin-tab-btn px-4 py-2 rounded-xl text-sm font-semibold text-gray-300 hover:bg-gray-800 cursor-pointer">Menu Manager</button>
+            </div>
+
+            <!-- Tab Content: Orders -->
+            <div id="admin-tab-orders" class="space-y-4">
+                <div class="flex items-center justify-between">
+                    <h4 class="font-bold text-white">Recent Customer Orders</h4>
+                    <button onclick="clearAdminOrders()" class="text-xs text-red-400 hover:underline">Clear Orders</button>
+                </div>
+                <div id="admin-orders-list" class="space-y-3">
+                    <!-- Populated dynamically -->
+                </div>
+            </div>
+
+            <!-- Tab Content: Bookings -->
+            <div id="admin-tab-bookings" class="space-y-4 hidden">
+                <h4 class="font-bold text-white">Table Booking Reservations</h4>
+                <div id="admin-bookings-list" class="space-y-3">
+                    <!-- Populated dynamically -->
+                </div>
+            </div>
+
+            <!-- Tab Content: Menu Manager -->
+            <div id="admin-tab-menu" class="space-y-4 hidden">
+                <div class="flex items-center justify-between">
+                    <h4 class="font-bold text-white">Manage Shop Menu Items</h4>
+                    <button onclick="openAddModal(); closeAdminModal();" class="bg-amber-500 text-gray-950 font-bold px-3 py-1.5 rounded-lg text-xs">＋ Add New Dish</button>
+                </div>
+                <div id="admin-menu-list" class="space-y-2">
+                    <!-- Populated dynamically -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- External JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>
